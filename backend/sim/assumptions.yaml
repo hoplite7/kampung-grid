@@ -1,0 +1,28 @@
+# Time to Last Knock: every guess the simulation makes, in one place. (Person 4 owns this.)
+# Show these on a slide. After each real wargame, replace guesses with measured numbers
+# and change the note to say where the number came from.
+
+runs: 500                      # crisis nights simulated per answer
+random_seed: 123               # fixed, so every rehearsal shows the same numbers
+
+stairs:
+  seconds_per_floor: 15        # our guess: a normal walking pace on HDB stairs (time yourself!)
+  switch_stairwell_seconds: 90 # our guess: down to the ground floor and across to the other stairwell
+
+at_the_door_minutes: 2         # our guess: knock, wait, check the person is okay
+
+reaction_minutes:              # from the alert to leaving their flat
+  awake: [1, 3]                # our guess: uniform between these
+  asleep: [3, 8]               # our guess
+  asleep_hours: "00:00-06:30"  # when most helpers are asleep
+
+answer_chance:                 # chance a helper who is home responds at all
+  trained_awake: 0.92          # our guess: trained / SGSecure helpers know what to do
+  trained_asleep: 0.80
+  untrained_awake: 0.80
+  untrained_asleep: 0.55
+
+official_responders_minutes: 25  # our guess: if no neighbour responds for someone
+
+gap:
+  floor_bands: [[1, 4], [5, 9], [10, 14]]

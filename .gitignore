@@ -1,0 +1,24 @@
+# Secrets
+.env
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+backend/kampung.db
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/dist/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Vault keys (generated on first run; never share or commit)
+backend/.keys/
+ai_cache.tmp

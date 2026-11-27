@@ -1,0 +1,82 @@
+[
+  {
+    "text": "Eh the auntie at 9-12 never open door, got smell leh",
+    "expect_unit": "#09-12",
+    "min_urgency": 4,
+    "note": "The demo message"
+  },
+  {
+    "text": "uncle #13-07 wheelchair cannot go down, lift spoil already",
+    "expect_unit": "#13-07",
+    "min_urgency": 3
+  },
+  {
+    "text": "level 12 unit 2 the old lady knock no answer, tv also off",
+    "expect_unit": "#12-02",
+    "min_urgency": 4
+  },
+  {
+    "text": "09-12 婆婆的氧气机没电了 很急！",
+    "expect_unit": "#09-12",
+    "min_urgency": 5,
+    "note": "Mandarin: grandma's oxygen machine has no power, urgent"
+  },
+  {
+    "text": "Pakcik tingkat 10 unit 11 jatuh, tak boleh bangun",
+    "expect_unit": "#10-11",
+    "min_urgency": 4,
+    "note": "Malay: uncle on level 10 unit 11 fell, can't get up"
+  },
+  {
+    "text": "11-04 தாத்தா கதவு திறக்கவில்லை",
+    "expect_unit": "#11-04",
+    "min_urgency": 4,
+    "note": "Tamil: grandfather at 11-04 not opening the door"
+  },
+  {
+    "text": "smoke coming out from 8-01 corridor!!!",
+    "expect_unit": "#08-01",
+    "min_urgency": 5
+  },
+  {
+    "text": "anyone got torchlight? whole block dark sia",
+    "expect_unit": null,
+    "max_urgency": 2,
+    "note": "No unit, not an emergency"
+  },
+  {
+    "text": "lol 14-03 got ghost haha",
+    "expect_unit": "#14-03",
+    "max_urgency": 2,
+    "note": "A joke about the vacant unit"
+  },
+  {
+    "text": "the auntie at 99-99 fainted",
+    "expect_unit": null,
+    "min_urgency": 3,
+    "note": "Unit doesn't exist: must not invent one"
+  },
+  {
+    "text": "Mr Lim 5-08 haven't see him 2 days, newspaper pile up outside",
+    "expect_unit": "#05-08",
+    "min_urgency": 3
+  },
+  {
+    "text": "stuck in lift B between 6 and 7 floor, 3 people inside, one is old man breathing hard",
+    "expect_unit": null,
+    "min_urgency": 4,
+    "note": "Lift, not a unit"
+  },
+  {
+    "text": "Mdm Wong never answer phone whole day, very worried",
+    "expect_unit": "#12-02",
+    "min_urgency": 3,
+    "note": "Name, no unit: match from the residents list"
+  },
+  {
+    "text": "Uncle Lim downstairs no one see him since Monday",
+    "expect_unit": "#05-08",
+    "min_urgency": 3,
+    "note": "Name with 'Uncle' title"
+  }
+]

@@ -1,0 +1,26 @@
+{
+ "bd540c45c532a5bc8c5694d676ef3adcb5e13f41": {
+  "stop_reason": "tool_use",
+  "content": [
+   {
+    "type": "tool_use",
+    "name": "write_task",
+    "input": {
+     "headline": "Check on Mdm Wong Lai Fong, #12-02, now. Lifts are down, take Stairwell A.",
+     "steps": [
+      "Take Stairwell A up to level 12. Do not use the lift.",
+      "Knock firmly and call her name. She is hard of hearing, so wave or face her.",
+      "Speak in Cantonese or Mandarin. Ask if she is safe and needs help.",
+      "If she does not respond or is in danger, call 995 right away."
+     ],
+     "bring": [
+      "Torch",
+      "Phone",
+      "Power bank"
+     ],
+     "sms": "KG: Pls check Mdm Wong Lai Fong #12-02 now. Lifts down, use Stairwell A. She is hard of hearing; speak Cantonese/Mandarin. Reply 1=reached 2=need help"
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,105 @@
+{
+  "_note": "ALL PEOPLE HERE ARE FICTIONAL. No real names, numbers or addresses. See seed/README.md for what each field means.",
+  "blocks": [
+    {
+      "id": 123,
+      "name": "Block 123",
+      "floors": 14,
+      "units_per_floor": 12,
+      "stairwells": { "A": [1, 2, 3, 4, 5, 6], "B": [7, 8, 9, 10, 11, 12] },
+      "vacant": ["#14-03", "#02-11", "#09-01"],
+      "residents": [
+        {
+          "id": "tan", "name": "Mdm Tan Ah Moi", "unit": "#09-12", "phone": "+65 9000 0001",
+          "language": "hokkien", "age": 81, "has_smartphone": false,
+          "vulnerable": {
+            "lives_alone": true, "powered_equipment": "oxygen concentrator",
+            "equipment_battery_hours": 1, "mobility": "walker", "hearing": "hard of hearing",
+            "languages": ["Hokkien", "some Mandarin"], "how_to_knock": "knock loudly and call her name"
+          }
+        },
+        {
+          "id": "rajan", "name": "Mr Rajan Pillai", "unit": "#13-07", "phone": "+65 9000 0002",
+          "language": "ta", "age": 74, "has_smartphone": true,
+          "vulnerable": { "lives_alone": false, "mobility": "wheelchair", "languages": ["Tamil", "English"] }
+        },
+        {
+          "id": "wong", "name": "Mdm Wong Lai Fong", "unit": "#12-02", "phone": "+65 9000 0003",
+          "language": "zh", "age": 86, "has_smartphone": false,
+          "vulnerable": { "lives_alone": true, "hearing": "hard of hearing", "languages": ["Cantonese", "Mandarin"] }
+        },
+        {
+          "id": "ismail", "name": "Mr Ismail Bin Osman", "unit": "#10-11", "phone": "+65 9000 0004",
+          "language": "ms", "age": 79, "has_smartphone": true,
+          "vulnerable": { "lives_alone": false, "mobility": "walker", "languages": ["Malay"] }
+        },
+        {
+          "id": "krishnan", "name": "Mr Krishnan Nair", "unit": "#11-04", "phone": "+65 9000 0005",
+          "language": "ta", "age": 83, "has_smartphone": false,
+          "vulnerable": { "lives_alone": true, "mobility": "walker", "languages": ["Tamil", "Malayalam"] }
+        },
+        {
+          "id": "lim", "name": "Mr Lim Boon Huat", "unit": "#05-08", "phone": "+65 9000 0006",
+          "language": "hokkien", "age": 77, "has_smartphone": true, "silence_opt_in": true,
+          "vulnerable": { "lives_alone": true, "languages": ["Hokkien", "Mandarin"] }
+        },
+
+        { "id": "aziz", "name": "Aziz Rahman", "unit": "#07-10", "phone": "+65 9000 0011", "language": "ms", "age": 34 },
+        { "id": "meiling", "name": "Tan Mei Ling", "unit": "#05-02", "phone": "+65 9000 0012", "language": "zh", "age": 29 },
+        {
+          "id": "daniel", "name": "Daniel Goh", "unit": "#03-05", "phone": "+65 9000 0013", "language": "en", "age": 41,
+          "is_essential_worker": true, "essential_role": "utility engineer"
+        },
+        { "id": "kavitha", "name": "Kavitha Raj", "unit": "#09-04", "phone": "+65 9000 0014", "language": "ta", "age": 38 },
+        { "id": "ryan", "name": "Ryan Teo", "unit": "#12-09", "phone": "+65 9000 0015", "language": "en", "age": 26 },
+        { "id": "nurul", "name": "Nurul Huda", "unit": "#10-05", "phone": "+65 9000 0016", "language": "ms", "age": 45 },
+        { "id": "benjamin", "name": "Benjamin Ng", "unit": "#13-01", "phone": "+65 9000 0017", "language": "en", "age": 31 },
+        {
+          "id": "priya", "name": "Priya Nair", "unit": "#06-03", "phone": "+65 9000 0018", "language": "en", "age": 36,
+          "is_essential_worker": true, "essential_role": "nurse", "dependent_unit": "#11-04"
+        },
+
+        { "id": "lee", "name": "Lee Family", "unit": "#02-07", "phone": "+65 9000 0021", "language": "zh" },
+        { "id": "hassan", "name": "Hassan Yusof", "unit": "#04-11", "phone": "+65 9000 0022", "language": "ms" },
+        { "id": "jo", "name": "Jo Tan", "unit": "#08-01", "phone": "+65 9000 0023", "language": "en" },
+        { "id": "lau", "name": "Mdm Lau Siew Lan", "unit": "#11-10", "phone": "+65 9000 0024", "language": "zh" },
+        { "id": "chong", "name": "Chong Wei Jie", "unit": "#14-06", "phone": "+65 9000 0025", "language": "en" },
+        { "id": "farah", "name": "Farah Aminah", "unit": "#01-04", "phone": "+65 9000 0026", "language": "ms" }
+      ],
+      "helpers": [
+        { "resident_id": "aziz", "skills": ["cpr", "first_aid"], "languages": ["ms", "en"], "home_hours": ["18:00-08:00"], "sgsecure_responder": true },
+        { "resident_id": "meiling", "skills": ["first_aid"], "languages": ["zh", "en"], "home_hours": ["17:00-09:00"], "sgsecure_responder": true },
+        { "resident_id": "daniel", "skills": [], "languages": ["en", "zh"], "home_hours": ["19:00-07:00"], "sgsecure_responder": false },
+        { "resident_id": "kavitha", "skills": ["first_aid"], "languages": ["ta", "en"], "home_hours": ["08:00-22:00"], "sgsecure_responder": false },
+        { "resident_id": "ryan", "skills": ["cpr", "first_aid"], "languages": ["en"], "home_hours": ["08:00-23:00"], "sgsecure_responder": true },
+        { "resident_id": "nurul", "skills": [], "languages": ["ms", "en"], "home_hours": ["00:00-24:00"], "sgsecure_responder": false },
+        { "resident_id": "benjamin", "skills": [], "languages": ["en", "zh"], "home_hours": ["18:00-08:00"], "sgsecure_responder": false },
+        { "resident_id": "priya", "skills": ["cpr", "first_aid"], "languages": ["ta", "en"], "home_hours": ["20:00-07:00"], "sgsecure_responder": true }
+      ]
+    },
+    {
+      "id": 125,
+      "name": "Block 125",
+      "floors": 12,
+      "units_per_floor": 8,
+      "stairwells": { "A": [1, 2, 3, 4], "B": [5, 6, 7, 8] },
+      "vacant": ["#03-02"],
+      "residents": [
+        { "id": "b125_ong", "name": "Mr Ong Kok Leong", "unit": "#11-03", "phone": "+65 9000 0101", "language": "hokkien", "age": 88,
+          "vulnerable": { "lives_alone": true, "powered_equipment": "home dialysis machine", "languages": ["Hokkien"] } },
+        { "id": "b125_siti", "name": "Mdm Siti Rahmah", "unit": "#09-06", "phone": "+65 9000 0102", "language": "ms", "age": 80,
+          "vulnerable": { "lives_alone": true, "mobility": "wheelchair", "languages": ["Malay"] } },
+        { "id": "b125_ho", "name": "Mdm Ho Mei Fen", "unit": "#12-01", "phone": "+65 9000 0103", "language": "zh", "age": 84,
+          "vulnerable": { "lives_alone": true, "hearing": "hard of hearing", "languages": ["Cantonese"] } },
+        { "id": "b125_muthu", "name": "Mr Muthu Samy", "unit": "#07-08", "phone": "+65 9000 0104", "language": "ta", "age": 76,
+          "vulnerable": { "lives_alone": false, "mobility": "walker", "languages": ["Tamil"] } },
+        { "id": "b125_ken", "name": "Ken Lau", "unit": "#02-05", "phone": "+65 9000 0105", "language": "en", "age": 30 },
+        { "id": "b125_anne", "name": "Anne Seah", "unit": "#05-02", "phone": "+65 9000 0106", "language": "en" },
+        { "id": "b125_rosli", "name": "Rosli Hamid", "unit": "#08-04", "phone": "+65 9000 0107", "language": "ms" }
+      ],
+      "helpers": [
+        { "resident_id": "b125_ken", "skills": ["first_aid"], "languages": ["en"], "home_hours": ["08:00-20:00"], "sgsecure_responder": false }
+      ]
+    }
+  ]
+}
