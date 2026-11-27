@@ -17,17 +17,123 @@ frontend/   React app: /dashboard, /control, /phone
 docs/       api.md: the agreed API (change it before changing a route)
 ```
 
-## Quick start: one command
+## Project structure and runtime files
+
+The app runs as two cooperating processes: the Python backend serves data and AI features, while
+the React frontend provides the browser screens. The frontend sends API and WebSocket requests
+through the Vite development server to the backend.
+
+```text
+.
+|-- .gitignore
+|-- README.md
+|-- start.bat                     Windows setup and launcher
+|-- start.sh                      macOS/Linux setup and launcher
+|-- docs/
+|   `-- api.md                    Shared API contract
+|-- backend/
+|   |-- requirements.txt          Python runtime dependencies
+|   |-- .env.example              Safe template; copy to the ignored .env for local secrets/settings
+|   |-- ai_cache.json             Saved AI answers for offline/rehearsal fallback
+|   |-- app/
+|   |   |-- __init__.py
+|   |   |-- main.py               FastAPI entry point, routes, and startup lifecycle
+|   |   |-- ai.py                 Claude calls, prompt handling, and cached/fallback answers
+|   |   |-- db.py                 SQLite connection and table setup
+|   |   |-- models.py             Database and API data models
+|   |   |-- live.py               WebSocket updates
+|   |   |-- authority.py          Authority access logic
+|   |   |-- briefing.py           Incident briefings and after-action summaries
+|   |   |-- crisis.py             Crisis workflow and task coordination
+|   |   |-- keys.py               Local encryption key handling
+|   |   |-- messaging.py          Message/report processing
+|   |   |-- people.py             Resident and helper data operations
+|   |   |-- risk.py               Risk assessment
+|   |   |-- rumours.py            Rumour detection and handling
+|   |   |-- silence.py            Silence-alert workflow
+|   |   |-- sim.py                Scenario simulation and what-if calculations
+|   |   |-- telegram_bot.py       Optional Telegram integration
+|   |   |-- trust.py              Report trust checks
+|   |   |-- vault.py              Protected profile and unlock operations
+|   |   `-- voice.py              Optional voice-note transcription
+|   |-- seed/
+|   |   |-- __init__.py
+|   |   |-- seed.py               Loads demo data into SQLite
+|   |   |-- block123.json         Fictional sample block/resident data
+|   |   `-- README.md             Seed-data notes
+|   |-- sim/
+|   |   `-- assumptions.yaml      Simulation assumptions
+|   `-- tests/
+|       |-- messages.json         AI/report parsing test fixtures
+|       |-- test_crisis.py
+|       |-- test_parse.py
+|       |-- test_sim.py
+|       |-- test_trust.py
+|       |-- test_vault.py
+|       |-- test_week5.py
+|       `-- test_week6.py
+|-- frontend/
+|   |-- package.json              Frontend dependencies and scripts
+|   |-- package-lock.json          Locked npm dependency versions
+|   |-- README.md
+|   |-- .gitignore
+|   |-- index.html                 Browser entry document
+|   |-- vite.config.ts             Vite, React/Tailwind plugins, and backend proxy
+|   |-- tsconfig.json              TypeScript project configuration
+|   |-- tsconfig.app.json          Browser app TypeScript configuration
+|   |-- tsconfig.node.json         Vite config TypeScript configuration
+|   |-- .oxlintrc.json             Linter configuration
+|   |-- public/
+|   |   `-- favicon.svg
+|   `-- src/
+|       |-- main.tsx               React entry point
+|       |-- App.tsx                Routes and application shell
+|       |-- index.css              Global styles
+|       |-- lib/api.ts             Shared API/WebSocket client and frontend types
+|       |-- components/
+|       |   |-- Block125Card.tsx
+|       |   |-- BlockView.tsx
+|       |   |-- BriefPanels.tsx
+|       |   |-- ConnectionDot.tsx
+|       |   |-- ReportFeed.tsx
+|       |   |-- SilencePanel.tsx
+|       |   |-- TTLKPanel.tsx
+|       |   `-- UnlockLog.tsx
+|       `-- pages/
+|           |-- Control.tsx
+|           |-- Dashboard.tsx
+|           |-- Join.tsx
+|           |-- Phone.tsx
+|           `-- PrintCard.tsx
+```
+
+### What must exist to run it
+
+- **Required source/config:** `backend/app/`, `backend/seed/`, `backend/requirements.txt`,
+  `frontend/src/`, `frontend/package.json`, `frontend/package-lock.json`, `frontend/index.html`,
+  `frontend/vite.config.ts`, and the TypeScript config files.
+- **Local setup, created once:** `backend/.venv/` (Python packages) and `frontend/node_modules/`
+  (npm packages). Recreate them with the setup steps below if missing.
+- **Local settings:** `backend/.env` is optional for basic operation and must stay private.
+  Add `ANTHROPIC_API_KEY` there to enable Claude; the backend has a fallback without it.
+- **Runtime data:** `backend/kampung.db` and `backend/.keys/` are created/used by the backend.
+  The seed command supplies the fictional demo data. `backend/ai_cache.json` holds saved answers
+  for offline/rehearsal use.
+- **AI entry point:** there is no separate model-weight file in this project. Claude is called
+  by `backend/app/ai.py` when configured; the surrounding crisis and simulation logic is local code.
+
+## Quick start
 
 You need **Python 3.11+** and **Node.js 20+** installed. Then:
 
-- **Windows:** double-click **`start.bat`** (or run `start.bat` in a terminal).
-- **Mac / Linux:** in a terminal, run **`./start.sh`** from the `kampung-grid` folder.
+- **Windows:** if `start.bat` is present, run `.\start.bat` from PowerShell in the project folder.
+  If it is missing, use the two-terminal instructions under [Running it by hand](#running-it-by-hand-every-time).
+- **Mac / Linux:** run `./start.sh` from the project folder.
 
 The first run sets everything up (a few minutes); after that it starts in seconds and opens your browser
-at http://localhost:5173. To use Claude, paste your key into `backend/.env` (the script creates it), then restart.
+at http://localhost:5173. To use Claude, put your API key in `backend/.env` before starting the backend.
 
-To stop: **Ctrl+C** (Mac), or close both windows (Windows: the backend runs in its own window).
+To stop a manual run, press **Ctrl+C** in each terminal.
 
 The manual steps below do the same thing, if you prefer to see each one.
 
@@ -35,39 +141,74 @@ The manual steps below do the same thing, if you prefer to see each one.
 
 You need **Python 3.11+**, **Node.js 20+** and **Git**.
 
-### 1. Backend
+### Windows (PowerShell)
 
-```bash
+```powershell
 cd backend
 python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env               # then open .env and paste your ANTHROPIC_API_KEY
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+# Optional: edit .env and set ANTHROPIC_API_KEY to enable Claude
 python -m seed.seed                # loads Block 123 and Block 125
 ```
 
-### 2. Frontend
+Then install frontend packages once:
+
+```powershell
+cd ..\frontend
+npm install
+```
+
+### macOS / Linux
 
 ```bash
-cd frontend
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+cp -n .env.example .env
+# Optional: edit .env and set ANTHROPIC_API_KEY to enable Claude
+python -m seed.seed
+
+cd ../frontend
 npm install
 ```
 
 ## Running it by hand (every time)
 
-Two terminals:
+Run these from the project folder in **two separate terminals**. On Windows, use PowerShell:
+
+**Terminal 1 — backend (PowerShell):**
+
+```powershell
+cd backend
+.\.venv\Scripts\Activate.ps1
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+**Terminal 2 — frontend (PowerShell):**
+
+```powershell
+cd frontend
+npm run dev -- --open
+```
+
+For **macOS / Linux**, activate the backend environment with `source .venv/bin/activate` instead:
 
 ```bash
 # Terminal 1
-cd backend && source .venv/bin/activate
+cd backend
+source .venv/bin/activate
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 # Terminal 2
 cd frontend
-npm run dev
+npm run dev -- --open
 ```
 
-Then open:
+The frontend opens the app in your browser. If it does not, open http://localhost:5173 manually.
+To stop the app, press **Ctrl+C** in both terminals. Available pages:
 
 | Screen | Address |
 | --- | --- |

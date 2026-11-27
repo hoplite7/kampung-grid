@@ -1,5 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/gin-react'plu
+import react from '@vitejs/plugin-react'
 import { createLogger, defineConfig } from 'vite'
 
 // The backend runs on port 8000. Every screen calls it through this dev server:
